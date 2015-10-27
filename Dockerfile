@@ -1,7 +1,9 @@
 FROM node:4
 RUN npm install harp -g
-EXPOSE 80
 ENV NODE_ENV=production
-ENTRYPOINT harp server /wiki --port 80
-COPY wiki /wiki
-COPY src /wiki
+ENV HARP_PORT 80
+EXPOSE 80
+VOLUME /wiki
+COPY src /src
+COPY start.sh /start.sh
+ENTRYPOINT /start.sh
